@@ -3,7 +3,7 @@
   <head>
     <title>Humanitarian Data science</title>
     <meta charset="utf-8">
-    <meta name="author" content="Bill Olander and Ahmadou Dicko" />
+    <meta name="author" content="Ahmadou Dicko and Bill Olander" />
     <meta name="date" content="2018-06-27" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
@@ -13,8 +13,8 @@
 class: center, middle, inverse, title-slide
 
 # Humanitarian Data science
-## Why reproducible analyse matter
-### Bill Olander and Ahmadou Dicko
+## Why reproducible analysis matters and how to start
+### Ahmadou Dicko and Bill Olander
 ### 27 June 2018
 
 ---
@@ -43,10 +43,13 @@ class: center, middle, inverse
 .center[![R](./images/reproducibleFlow.png)]
 
 ---
-## Analysis is often error prone and not reproducible
+## Analysis is often error prone and not reproducible: 
+.center[![flow](./images/excelerror.jpg)]
 
 ---
-## Lack of modern data science tools in the IMO community
+## We could do better 
+[callum taylor's analysis of Cholera in Yemen](https://callumgwtaylor.github.io/blog/2017/12/16/yemen-cholera-update-december/) 
+
 
 ---
 class: center, middle, inverse
@@ -61,6 +64,7 @@ class: center, middle, inverse
 
  - `R` is open source and free
  - `R` great community and around 12000 packages (add-ons)
+ -
 
 
 ---
@@ -76,15 +80,15 @@ data
 
 ```
 ## # A tibble: 7 x 4
-##   nom     village taille poids
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;
-## 1 Ali     B          165    50
-## 2 Marie   A          170    55
-## 3 Modou   A          200    90
-## 4 Babacar B          185    80
-## 5 Fatim   B          155    48
-## 6 David   B          175    75
-## 7 Aicha   A          180    70
+##       nom village taille poids
+##     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     Ali       B    165    50
+## 2   Marie       A    170    55
+## 3   Modou       A    200    90
+## 4 Babacar       B    185    80
+## 5   Fatim       B    155    48
+## 6   David       B    175    75
+## 7   Aicha       A    180    70
 ```
 
 
@@ -101,31 +105,100 @@ data %&gt;%
 
 ```
 ## # A tibble: 7 x 6
-##   nom     village taille poids taille_metre   imc
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;
-## 1 David   B          175    75         1.75  24.5
-## 2 Babacar B          185    80         1.85  23.4
-## 3 Modou   A          200    90         2     22.5
-## 4 Aicha   A          180    70         1.8   21.6
-## 5 Fatim   B          155    48         1.55  20.0
-## 6 Marie   A          170    55         1.7   19.0
-## 7 Ali     B          165    50         1.65  18.4
+##       nom village taille poids taille_metre      imc
+##     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+## 1   David       B    175    75         1.75 24.48980
+## 2 Babacar       B    185    80         1.85 23.37473
+## 3   Modou       A    200    90         2.00 22.50000
+## 4   Aicha       A    180    70         1.80 21.60494
+## 5   Fatim       B    155    48         1.55 19.97919
+## 6   Marie       A    170    55         1.70 19.03114
+## 7     Ali       B    165    50         1.65 18.36547
 ```
+
+
+---
+## Grammar of data manipulation and graphics: WFP dataset from Guinea
+_explore: which enumerators might have skipped questions?_
+
+
+```r
+library(ggplot2)
+
+guinea_data &lt;- read_excel(path = "data/guinea_data.xls", sheet = 1)
+
+qplot(Q03, uwFCS, data=guinea_data, geom=c("boxplot", "jitter"), color=Q03)
+```
+
+![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+
+---
+## Grammar of data manipulation and graphics: WFP dataset from Guinea
+_explore and filter: Kérouané prefecture in Kankan looks suspicious..._
+
+
+```r
+guinea_data %&gt;% filter(Q03=="Kankan" &amp; Q04=="Kérouané") %&gt;% ggplot(aes(x=Code_enqueteur_menage, y=uwFCS, color=Code_enqueteur_menage)) + geom_boxplot() + geom_jitter()
+```
+
+![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+
+---
+## Grammar of data manipulation and graphics: WFP dataset from Guinea
+_anonymize: maybe it's not cool to show the name of the enumerators..._
+
+
+```r
+library(anonymizer)
+
+guinea_data %&gt;% filter(Q03=="Kankan" &amp; Q04=="Kérouané") %&gt;% mutate(enqueter_anon = anonymize(Code_enqueteur_menage, .algo = "crc32")) %&gt;% ggplot(aes(x=enqueter_anon, y=uwFCS, color=enqueter_anon)) + geom_boxplot() + geom_jitter()
+```
+
+![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+
+---
+## Don't fear the code
+_we're already doing it_
+.center[![flow](./images/excel.png)]
+
 
 ---
 class: center, middle, inverse
 ## Building a Massive Open Online Course
 
+
+---
+## Data Camp's course editor 
+[data camp course editor](https://authoring.datacamp.com/)
+
+
+
+
 ---
 class: center, middle, inverse
 ## Demo
+
+
+---
+## Demo Course 
+[Data Science for HumanitaRians - Quick &amp; Dirty Data Visualization with Qplot](https://www.datacamp.com/courses/7692)
+
+
 
 ---
 ## Main activities and timeline
 
 #### Develop core [curriculum](https://docs.google.com/document/d/1ztVle5UL7TPJXh9v5amzKxRhEutRf4WqhdnCuaR7kwc/edit#)
+
 #### Organize a 1 week "sprint" session inviting core contributors (HDX, WFP, UNHCR) to build the skeleton and muscles of the course.
-#### Refine content with support from DataCamp and possibly RStudio and test with large pool of IMO.
+
+#### Test out content with large pool of IMOS, for example CartONG's GEONG conference.
+
+#### Refine content with support from DataCamp and possibly RStudio.
+
 #### Launch content online by end of 2018 advertise to users but also advertise so that content can be expanded/translated.
 
 
