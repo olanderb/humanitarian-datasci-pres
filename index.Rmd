@@ -58,7 +58,7 @@ class: center, middle, inverse
 ## Why R ?
 
  - `R` is open source and free
- - `R` has a enthusiastic (bordering on fanatic) community 
+ - `R` has an enthusiastic (bordering on fanatic) community 
  - `R` has around 12000 packages (add-ons) and anyone can create/publish a package
  - Batman is cooler than Superman
 .center[![batman](./images/batman.jpg)]
@@ -87,7 +87,7 @@ data %>%
 
 ---
 ## Grammar of data manipulation and graphics: WFP dataset from Guinea
-_explore: which enumerators might have skipped questions?_
+_explore: which enumerators might have raced through questions?_
 
 ```{r}
 library(ggplot2)
@@ -112,7 +112,7 @@ guinea_data %>% filter(Q03=="Kankan" & Q04=="Kérouané") %>% ggplot(aes(x=Code_
 
 ---
 ## Grammar of data manipulation and graphics: WFP dataset from Guinea
-_anonymize: maybe it's not cool to show the name of the enumerators..._
+_anonymize: maybe it's not cool to show the name of the enumerators_
 
 ```{r}
 
@@ -142,8 +142,15 @@ Advantages:
 3. Teaching models 
 4. Reproducible
 
+Challenges:
+1. Producing high quality videos 
+2. Reinforcing concepts in each lesson
+3. Finding relevant humanitarian examples 
 
-[data camp course editor](https://authoring.datacamp.com/)
+
+[data camp's authoring guide](https://authoring.datacamp.com/)
+
+[data camp's course editor](https://www.datacamp.com/teach/edit/repositories/2626/branches/master)
 
 
 
@@ -166,7 +173,7 @@ class: center, middle, inverse
 
 #### Organize a 1 week "sprint" session inviting core contributors (HDX, WFP, UNHCR) to build the skeleton and muscles of the course.
 
-#### Test out content with large pool of IMOS, for example CartONG's GEONG conference.
+#### Test out content with large pool of IMOS, for example at CartONG's GEONG conference in October.
 
 #### Refine content with support from DataCamp and possibly RStudio.
 
