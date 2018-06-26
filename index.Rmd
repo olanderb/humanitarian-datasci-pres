@@ -38,7 +38,8 @@ class: center, middle, inverse
 
 ---
 ## Analysis is often error prone and not reproducible: 
-.center[![flow](./images/excelerror.jpg)]
+_we all know about these type of errors_
+.center[![excelerror](./images/excelerror.jpg)]
 
 ---
 ## We could do better 
@@ -57,9 +58,10 @@ class: center, middle, inverse
 ## Why R ?
 
  - `R` is open source and free
- - `R` great community and around 12000 packages (add-ons)
- -
-
+ - `R` has a enthusiastic (bordering on fanatic) community 
+ - `R` has around 12000 packages (add-ons) and anyone can create/publish a package
+ - Batman is cooler than Superman
+.center[![batman](./images/batman.jpg)]
 
 ---
 ## Grammar of data manipulation and graphics
@@ -133,7 +135,14 @@ class: center, middle, inverse
 
 
 ---
-## Data Camp's course editor 
+## Data Camp's Course Editor 
+Advantages:
+1. Free
+2. Easy to build content
+3. 
+3. Reproducible
+
+
 [data camp course editor](https://authoring.datacamp.com/)
 
 
