@@ -92,7 +92,7 @@ _explore: which enumerators might have skipped questions?_
 ```{r}
 library(ggplot2)
 
-guinea_data <- read_excel(path = "data/guinea_data.xls", sheet = 1)
+guinea_data <- read_excel(path = "data/guinea_data.xlsx", sheet = 1)
 
 qplot(Q03, uwFCS, data=guinea_data, geom=c("boxplot", "jitter"), color=Q03)
 
@@ -139,8 +139,8 @@ class: center, middle, inverse
 Advantages:
 1. Free
 2. Easy to build content
-3. 
-3. Reproducible
+3. Teaching models 
+4. Reproducible
 
 
 [data camp course editor](https://authoring.datacamp.com/)
